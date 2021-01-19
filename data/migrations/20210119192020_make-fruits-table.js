@@ -5,10 +5,10 @@ exports.up = function(knex) {
     table.increments();
 
     // add not null, unique 'name' (varchar 128)
-    table.string('name', 128);
+    table.string('name', 128).notNullable().unique();
 
     // add not null 'avgWeightOz' (float)
-    table.float('avgWeightOz');
+    table.float('avgWeightOz').notNullable();
 
     // add 'isDelicious' (boolean)
     table.boolean('isDelicious');
