@@ -5,11 +5,3 @@ const configs = require('../knexfile.js');
 const db = knex(configs[env]);
 
 module.exports = db;
-
-// const db = knex({
-//   client: 'sqlite3',
-//   connection: {
-//     filename: './data/produce.db3'
-//   },
-//   useNullAsDefault: true
-// });
