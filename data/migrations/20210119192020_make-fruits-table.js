@@ -1,8 +1,10 @@
 exports.up = function(knex) {
   // make the fruits table
   return knex.schema.createTable(table => {
-    // add primary key 'id'
-    // add not null, unique 'name' 
+    // add primary key 'id' (integer)
+    table.increments('fruit_id')
+
+    // add not null, unique 'name' (varchar 128)
     // add not null 'avgWeightOz' (float)
     // add 'isDelicious' (boolean)
   })
