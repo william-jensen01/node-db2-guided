@@ -11,41 +11,40 @@ const db = knex({
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   db('fruits')
     .then(fruits => {
       res.json(fruits);
     })
-    .catch(err => {
-      res.status(500).json({ message: 'Failed to retrieve fruits' });
-    });
+    .catch(next);
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', (req, res, next) => {
   const { id } = req.params;
 
   db('fruits').where({ id }).first()
     .then(fruit => {
       res.json(fruit);
     })
-    .catch(err => {
-      res.status(500).json({ message: 'Failed to retrieve fruit' });
-    });
+    .catch(next);
 });
 
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
   const fruitData = req.body;
   db('fruits').insert(fruitData)
     .then(ids => {
-      db('fruits').where({ id: ids[0] })
-        .then(newFruitEntry => {
-          res.status(201).json(newFruitEntry);
-        });
+      return db('fruits').where({ id: ids[0] })
     })
-    .catch(err => {
-      console.log('POST error', err);
-      res.status(500).json({ message: "Failed to store data" });
-    });
+    .then(newFruitEntry => {
+      res.status(201).json(newFruitEntry);
+    })
+    .catch(next);
 });
+
+router.use((err, req, res, next) => {
+  const env = process.env.NODE_ENV || 'development';
+  const message = env === 'development' ? err.message : 'something bad happened';
+  res.status(500).json(message);
+})
 
 module.exports = router;
