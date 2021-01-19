@@ -1,6 +1,6 @@
 exports.up = function(knex) {
   // make the fruits table
-  return knex.schema.createTable(table => {
+  return knex.schema.createTable('fruits', table => {
     // add primary key unique not null 'id' (integer)
     table.increments();
 
