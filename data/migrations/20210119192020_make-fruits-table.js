@@ -17,5 +17,5 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
   // destroy the fruits table
-  
+  return knex.schema.dropTableIfExists('fruits');
 };
