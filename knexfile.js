@@ -1,10 +1,18 @@
 module.exports = {
   development: {
     client: 'sqlite3',
-    connection: {
+    connection: { // in other platforms, this would be a server
       filename: './data/produce.db3',
     },
-    useNullAsDefault: true, // sqlite3 thing
+    useNullAsDefault: true, // a sqlite3 thing
+    // generates migration files in a data/migrations/folder
+    migrations: {
+      directory: './data/migrations'
+    },
+    // generates seed files in a data/migrations/folder
+    seeds: {
+      directory: './data/seeds'
+    }
   },
 
   staging: {
