@@ -8,8 +8,11 @@ exports.up = function(knex) {
     table.string('name', 128);
 
     // add not null 'avgWeightOz' (float)
+    table.float('avgWeightOz');
+
     // add 'isDelicious' (boolean)
-  })
+    table.boolean('isDelicious');
+  });
 };
 
 exports.down = function(knex) {
