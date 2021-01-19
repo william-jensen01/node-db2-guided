@@ -12,7 +12,7 @@ module.exports = {
     // generates seed files in a data/migrations/folder
     seeds: {
       directory: './data/seeds',
-    }
+    },
   },
 
   staging: {
